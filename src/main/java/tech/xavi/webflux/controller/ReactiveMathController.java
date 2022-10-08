@@ -9,6 +9,8 @@ import tech.xavi.webflux.dto.MultiplyRequestDto;
 import tech.xavi.webflux.dto.Response;
 import tech.xavi.webflux.service.ReactiveMathService;
 
+import java.util.Map;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/reactiveMath")
@@ -32,7 +34,9 @@ public class ReactiveMathController {
     }
 
     @PostMapping("/multiply")
-    public Mono<Response> multiply(@RequestBody Mono<MultiplyRequestDto> requestDtoMono){
+    public Mono<Response> multiply(@RequestBody Mono<MultiplyRequestDto> requestDtoMono,
+                                    @RequestHeader Map<String,String> headers){
+        System.out.println(headers);
         return mathService.multiply(requestDtoMono);
     }
 
